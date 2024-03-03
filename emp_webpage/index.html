@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Employee</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background-image: url('https://st.depositphotos.com/1071909/2328/i/450/depositphotos_23287114-stock-photo-customer-or-employees-care-concept.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    form {
+      max-width: 400px;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 16px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-spacing: 0;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+      color: #333;
+      font-weight: bold;
+    }
+
+    td {
+      background-color: #fff;
+      color: #555;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Add Employee</h2>
+  <form action="/submit" method="post" onsubmit="return validateForm()">
+    <label for="empID">Employee ID:</label>
+    <input type="text" id="empID" name="empID" pattern="[0-9]+" title="Please enter a valid Employee ID (numbers only)" required>
+
+    <label for="empName">Employee Name:</label>
+    <input type="text" id="empName" name="empName" pattern="[A-Za-z\s]+" title="Please enter a valid Employee Name (letters and spaces only)" required>
+
+    <label for="empGender">Gender:</label>
+    <input type="text" id="empGender" name="empGender" pattern="[A-Za-z]+" title="Please enter a valid Gender (letters only)" required>
+
+    <label for="empLocation">Location:</label>
+    <input type="text" id="empLocation" name="empLocation" required>
+
+    <label for="joiningDate">Joining Date:</label>
+    <input type="date" id="joiningDate" name="joiningDate" required>
+
+    <label for="salary">Salary:</label>
+    <input type="number" id="salary" name="salary" required>
+
+    <label for="probationDate">Probation Date:</label>
+    <input type="date" id="probationDate" name="probationDate" required>
+
+    <label for="empEmail">Email:</label>
+    <input type="email" id="empEmail" name="empEmail" required>
+
+    <label for="empPassword">Password:</label>
+    <input type="password" id="empPassword" name="empPassword" pattern=".{8,}" title="Password must be at least 8 characters long" required>
+
+    <button type="submit">Add Employee</button>
+  </form>
+  
+
+  <script>
+    function validateForm() {
+      var empID = document.getElementById("empID").value;
+      var empName = document.getElementById("empName").value;
+      var empGender = document.getElementById("empGender").value;
+      var empEmail = document.getElementById("empEmail").value;
+      var empPassword = document.getElementById("empPassword").value;
+
+      // Regular expressions for validation
+      var empIDRegex = /^\d+$/;
+      var empNameRegex = /^[A-Za-z\s]+$/;
+      var empGenderRegex = /^[A-Za-z]+$/;
+      var empEmailRegex = /^\S+@\S+\.\S+$/;
+      var empPasswordRegex = /.{8,}/;
+
+      // Perform validation
+      if (!empIDRegex.test(empID)) {
+        alert("Please enter a valid Employee ID (numbers only)");
+        return false;
+      }
+      if (!empNameRegex.test(empName)) {
+        alert("Please enter a valid Employee Name (letters and spaces only)");
+        return false;
+      }
+      if (!empGenderRegex.test(empGender)) {
+        alert("Please enter a valid Gender (letters only)");
+        return false;
+      }
+      if (!empEmailRegex.test(empEmail)) {
+        alert("Please enter a valid Email");
+        return false;
+      }
+      if (!empPasswordRegex.test(empPassword)) {
+        alert("Password must be at least 8 characters long");
+        return false;
+      }
+
+      // If all validations pass, form submission proceeds
+      return true;
+    }
+  </script>
+</body>
+</html>
