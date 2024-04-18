@@ -4,8 +4,6 @@ services:
   king-6:
     image: david-6
     build: .
-    networks:
-      - king-david
     ports:
       - '6000:3009'
     environment:
