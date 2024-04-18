@@ -1,26 +1,19 @@
 version: '3.8'
-services:
-  nodejs:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: nodejs-container
-    ports:
-      - "3009:3009"
-    environment:
-      MONGO_URI: mongodb://mongo:27017/EmployeeDatabase # Update the MongoDB URI to connect to the MongoDB service
-    depends_on:
-      - mongo
-    # restart: unless-stopped
 
-  mongo:
-    container_name: mongodb-container
-    image: mongo
-    volumes:
-      - ./data:/data/db
+services:
+  king-6:
+    image: david-6
+    build: .
+    networks:
+      - king-david
+    ports:
+      - '6000:3009'
+    environment:
+      -  MONGO_URI:'mongodb://mongo:27017/EmployeeDatabase'
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
     ports:
       - '27017:27017'
-    healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]  # Health check command for MongoDB
-      interval: 10s
-      retries: 5
